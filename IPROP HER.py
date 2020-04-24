@@ -2,17 +2,22 @@ import time
 import random
 import sys
 
-randomint1 = random.randint(1000,3000)
-randomint2 = random.randint(1000,3000)
-randomint3 = random.randint(1000,3000)
+def init_glob_vars():
+    global randomint1
+    global randomint2
+    global randomint3
+
+    randomint1 = random.randint(1000,3000)
+    randomint2 = random.randint(1000,3000)
+    randomint3 = random.randint(1000,3000)
     
 
 
-global leverancier_lst
-leveranciers_lst = []
-leveranciers_lst.append({"leverancier": 1, "naam": "Shenzhen Electronics Co.", "levertijd": "1 werkdag", "voorraad": 17, "prijs": randomint1})
-leveranciers_lst.append({"leverancier": 2, "naam": "Harwood BV.", "levertijd": "3 werkdagen", "voorraad": 38, "prijs": randomint2})
-leveranciers_lst.append({"leverancier": 3, "naam": "Gansu Bixi International Trade Co.", "levertijd": "5 werkdagen", "voorraad": 3, "prijs": randomint3})
+    global leveranciers_lst
+    leveranciers_lst = []
+    leveranciers_lst.append({"leverancier": 1, "naam": "Shenzhen Electronics Co.", "levertijd": "1 werkdag", "voorraad": 17, "prijs": randomint1})
+    leveranciers_lst.append({"leverancier": 2, "naam": "Harwood BV.", "levertijd": "3 werkdagen", "voorraad": 38, "prijs": randomint2})
+    leveranciers_lst.append({"leverancier": 3, "naam": "Gansu Bixi International Trade Co.", "levertijd": "5 werkdagen", "voorraad": 3, "prijs": randomint3})
 
 
 
@@ -74,17 +79,17 @@ def leverancierkiezen():
         leverancierkiezen()
     else:
         print("Wilt u uw bestelling bekijken? (Voer in 'Ja' of 'Nee' in.)")
-        janee()
+        leverancier_input()
 
-def janee():
-    janee_input = input()
-    if janee_input == "Ja":
+def leverancier_input():
+    lvrc_input = input()
+    if lvrc_input == "Ja":
         show_bestelling()
-    elif janee_input == "Nee":
+    elif lvrc_input == "Nee":
         eind_bestelling()
     else:
         print("Ongeldige waarde. Vul alstublieft een geldige waarde in.")
-        janee()
+        leverancier_input()
         
 
 
@@ -104,14 +109,14 @@ def show_bestelling():
     else:
         print(producten_lst_ab[4]["artikelnaam"])
 
-    print("Wilt u de bestelling bevestigen? Zo ja, voer 'Ja' in. Zo niet, voer 'Nee' in.")
+    print("Wilt u de bestelling bevestigen? Zo ja, voer 'Ja' in. Als u de bestelling wilt annuleren, voer 'Nee' in.")
     bevestig_factuur()
 
 def bevestig_factuur():
-    janee_input = input()
-    if janee_input == "Ja":
+    bevestig_input = input()
+    if bevestig_input == "Ja":
         eind_bestelling()
-    elif janee_input == "Nee":
+    elif bevestig_input == "Nee":
         print("Bestelling geannuleerd.")
         sys.exit()
     else:
@@ -119,7 +124,7 @@ def bevestig_factuur():
         bevestig_factuur()
 
 
-def totaalbedrag_f():
+def totaalbedrag_check():
     global totaalbedrag
     if leverancier == 1:
         totaalbedrag = aantal * leveranciers_lst[0]["prijs"]
@@ -130,15 +135,15 @@ def totaalbedrag_f():
 
 def bereken_totaalbedrag():
     if artikel == 1:
-        totaalbedrag_f()
+        totaalbedrag_check()
     elif artikel == 2:
-        totaalbedrag_f()
+        totaalbedrag_check()
     elif artikel == 3:
-        totaalbedrag_f()
+        totaalbedrag_check()
     elif artikel == 4:
-        totaalbedrag_f()
+        totaalbedrag_check()
     else:
-        totaalbedrag_f()
+        totaalbedrag_check()
 
     return str(totaalbedrag)
 
@@ -164,6 +169,8 @@ def bestellen():
 
 
 def main():
+
+    init_glob_vars()
 
     print("Welkom bij Alibaba!\n \nBedankt dat u van plan bent bij ons te shoppen, wij verkopen producten door van andere bedrijven naar u,\ndaarom kunnen de prijzen, levertijden en de voorraden verschillen. Wij zullen nu de producten laten zien die wij verkopen op dit moment.")
     time.sleep(6)
