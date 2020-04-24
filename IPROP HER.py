@@ -23,37 +23,45 @@ def init_glob_vars():
 
 def artikel_kopen():
     global artikel
-    artikel = int(input())
-    if artikel > 5 or artikel < 1:
-        print("Voer alstublieft een geldig artikelnummer in.")
-        time.sleep(2)
-        artikel_kopen() 
-    
+    try:
+        artikel = int(input())
+        if artikel > 5 or artikel < 1:
+            print("Voer alstublieft een geldig artikelnummer in.")
+            time.sleep(2)
+            artikel_kopen() 
+        
 
-    else:
-        print("Hoeveel artikelen van dit product wilt u kopen? (Graag een getal ingeven)")
-        aantal_kopen()
+        else:
+            print("Hoeveel artikelen van dit product wilt u kopen? (Graag een getal ingeven)")
+            aantal_kopen()
+    except ValueError:
+       print("Voer alstublieft een getal in.")
+       artikel_kopen()
 
 
 
 def aantal_kopen():
         global aantal
-        aantal = int(input())
-        if aantal > 10 or aantal < 1:
-            print("Ongeldig aantal. Vul alstublieft een geldig aantal in.")
-            aantal_kopen()
-        else:
-            print("Kies alstublieft uit de volgende leveranciers: ")
-            time.sleep(1)
-    
-            for leverancier in leveranciers_lst:
-                global productprijs
-                productprijs = random.randint(1000,3000)
-                
-                
-                print('\nNummer Leverancier:', leverancier["leverancier"], "\n", 'Naam Leverancier:', leverancier["naam"], '\n', 'Product prijs:', leverancier["prijs"], "\n", 'Levertijd:', leverancier["levertijd"], '\n', 'Voorraad product:', leverancier["voorraad"])
+        try:
+            aantal = int(input())
+            if aantal > 10 or aantal < 1:
+                print("Ongeldig aantal. Vul alstublieft een geldig aantal in.")
+                aantal_kopen()
+            else:
+                print("Kies alstublieft uit de volgende leveranciers: ")
+                time.sleep(1)
+        
+                for leverancier in leveranciers_lst:
+                    global productprijs
+                    productprijs = random.randint(1000,3000)
+                    
+                    
+                    print('\nNummer Leverancier:', leverancier["leverancier"], "\n", 'Naam Leverancier:', leverancier["naam"], '\n', 'Product prijs:', leverancier["prijs"], "\n", 'Levertijd:', leverancier["levertijd"], '\n', 'Voorraad product:', leverancier["voorraad"])
 
-            leverancierkiezen()
+                leverancierkiezen()
+        except ValueError:
+            print("Voer alstublieft een getal in.")
+            aantal_kopen()
 
 def prnt_naam_leverancier():
     if leverancier == 1:
@@ -83,9 +91,9 @@ def leverancierkiezen():
 
 def leverancier_input():
     lvrc_input = input()
-    if lvrc_input == "Ja":
+    if lvrc_input == "Ja" or lvrc_input == "ja":
         show_bestelling()
-    elif lvrc_input == "Nee":
+    elif lvrc_input == "Nee" or lvrc_input == "nee":
         eind_bestelling()
     else:
         print("Ongeldige waarde. Vul alstublieft een geldige waarde in.")
@@ -114,9 +122,9 @@ def show_bestelling():
 
 def bevestig_factuur():
     bevestig_input = input()
-    if bevestig_input == "Ja":
+    if bevestig_input == "Ja" or bevestig_input == "ja":
         eind_bestelling()
-    elif bevestig_input == "Nee":
+    elif bevestig_input == "Nee" or bevestig_input == "nee":
         print("Bestelling geannuleerd.")
         sys.exit()
     else:
