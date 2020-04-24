@@ -11,13 +11,21 @@ def init_glob_vars():
     randomint2 = random.randint(1000,3000)
     randomint3 = random.randint(1000,3000)
     
-
-
+def init_lists():
     global leveranciers_lst
     leveranciers_lst = []
     leveranciers_lst.append({"leverancier": 1, "naam": "Shenzhen Electronics Co.", "levertijd": "1 werkdag", "voorraad": 17, "prijs": randomint1})
     leveranciers_lst.append({"leverancier": 2, "naam": "Harwood BV.", "levertijd": "3 werkdagen", "voorraad": 38, "prijs": randomint2})
     leveranciers_lst.append({"leverancier": 3, "naam": "Gansu Bixi International Trade Co.", "levertijd": "5 werkdagen", "voorraad": 3, "prijs": randomint3})
+
+    global producten_lst_ab
+    producten_lst_ab = []
+    producten_lst_ab.append({"artikelnr": 1, "artikelnaam": "Asus PC", "specs": "Core i5, 16GB RAM, 256GB Storage", "prijs": 1100, "voorraad": 10, "levertijd": "1 dag"})
+    producten_lst_ab.append({"artikelnr": 2, "artikelnaam": "Acer PC", "specs": "Core i5, 32GB RAM, 512GB Storage", "prijs": 1500, "voorraad": 10, "levertijd": "1 dag"})
+    producten_lst_ab.append({"artikelnr": 3, "artikelnaam": "Razer PC", "specs": "Core i7, 32GB RAM, 512GB Storage", "prijs": 2000, "voorraad": 10, "levertijd": "1 dag"}) 
+    producten_lst_ab.append({"artikelnr": 4, "artikelnaam": "Alienware PC", "specs": "Core i7, 64GB RAM, 512GB Storage", "prijs": 2300, "voorraad": 10, "levertijd": "1 dag"})
+    producten_lst_ab.append({"artikelnr": 5, "artikelnaam": "Apple PC", "specs": "Core i7, 64GB RAM, 1TB Storage", "prijs": 2800, "voorraad": 10, "levertijd": "1 dag"})
+
 
 
 
@@ -157,16 +165,6 @@ def bereken_totaalbedrag():
 
 
 def bestellen():
-    
-    global producten_lst_ab
-
-    producten_lst_ab = []
-    producten_lst_ab.append({"artikelnr": 1, "artikelnaam": "Asus PC", "specs": "Core i5, 16GB RAM, 256GB Storage", "prijs": 1100, "voorraad": 10, "levertijd": "1 dag"})
-    producten_lst_ab.append({"artikelnr": 2, "artikelnaam": "Acer PC", "specs": "Core i5, 32GB RAM, 512GB Storage", "prijs": 1500, "voorraad": 10, "levertijd": "1 dag"})
-    producten_lst_ab.append({"artikelnr": 3, "artikelnaam": "Razer PC", "specs": "Core i7, 32GB RAM, 512GB Storage", "prijs": 2000, "voorraad": 10, "levertijd": "1 dag"}) 
-    producten_lst_ab.append({"artikelnr": 4, "artikelnaam": "Alienware PC", "specs": "Core i7, 64GB RAM, 512GB Storage", "prijs": 2300, "voorraad": 10, "levertijd": "1 dag"})
-    producten_lst_ab.append({"artikelnr": 5, "artikelnaam": "Apple PC", "specs": "Core i7, 64GB RAM, 1TB Storage", "prijs": 2800, "voorraad": 10, "levertijd": "1 dag"})
-
     for product in producten_lst_ab:
         print('Artikelnr:', product["artikelnr"], '\n', 'Artikelnaam:',product["artikelnaam"], '\n','Specificaties:', product["specs"], '\n', 'Voorraad:' , product["voorraad"], '\n')
 
@@ -177,8 +175,8 @@ def bestellen():
 
 
 def main():
-
     init_glob_vars()
+    init_lists()
 
     print("Welkom bij Alibaba!\n \nBedankt dat u van plan bent bij ons te shoppen, wij verkopen producten door van andere bedrijven naar u,\ndaarom kunnen de prijzen, levertijden en de voorraden verschillen. Wij zullen nu de producten laten zien die wij verkopen op dit moment.")
     time.sleep(6)
