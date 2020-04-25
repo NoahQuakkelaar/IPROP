@@ -16,7 +16,7 @@ def init_lists():
     leveranciers_lst = []
     leveranciers_lst.append({"leverancier": 1, "naam": "Shenzhen Electronics Co.", "levertijd": "1 werkdag", "voorraad": 17, "prijs": randomint1})
     leveranciers_lst.append({"leverancier": 2, "naam": "Harwood BV.", "levertijd": "3 werkdagen", "voorraad": 38, "prijs": randomint2})
-    leveranciers_lst.append({"leverancier": 3, "naam": "Gansu Bixi International Trade Co.", "levertijd": "5 werkdagen", "voorraad": 3, "prijs": randomint3})
+    leveranciers_lst.append({"leverancier": 3, "naam": "Gansu Bixi International Trade Co.", "levertijd": "5 werkdagen", "voorraad": 24, "prijs": randomint3})
 
     global producten_lst_ab
     producten_lst_ab = []
@@ -53,7 +53,7 @@ def aantal_kopen():
         try:
             aantal = int(input())
             if aantal > 10 or aantal < 1:
-                print("Ongeldig aantal. Vul alstublieft een geldig aantal in.")
+                print("Ongeldig aantal. Vul alstublieft een geldig aantal in. (Let hierbij op de voorraad)")
                 aantal_kopen()
             else:
                 print("Kies alstublieft uit de volgende leveranciers: ")
@@ -72,20 +72,11 @@ def aantal_kopen():
             aantal_kopen()
 
 def prnt_naam_leverancier():
-    if leverancier == 1:
-        return leveranciers_lst[0]["naam"]
-    elif leverancier == 2:
-        return leveranciers_lst[1]["naam"]
-    else:
-        return leveranciers_lst[2]["naam"]
+    return leveranciers_lst[leverancier - 1]["naam"]
 
 def prnt_levertijd_leverancier():
-    if leverancier == 1:
-        return leveranciers_lst[0]["levertijd"]
-    elif leverancier == 2:
-        return leveranciers_lst[1]["levertijd"]
-    else:
-        return leveranciers_lst[2]["levertijd"]
+    return leveranciers_lst[leverancier -1]["levertijd"]
+    
 
 def leverancierkiezen():
     global leverancier
@@ -99,9 +90,9 @@ def leverancierkiezen():
 
 def leverancier_input():
     lvrc_input = input()
-    if lvrc_input == "Ja" or lvrc_input == "ja":
+    if lvrc_input == "Ja" or lvrc_input == "ja" or lvrc_input == "JA":
         show_bestelling()
-    elif lvrc_input == "Nee" or lvrc_input == "nee":
+    elif lvrc_input == "Nee" or lvrc_input == "nee" or lvrc_input == "NEE":
         eind_bestelling()
     else:
         print("Ongeldige waarde. Vul alstublieft een geldige waarde in.")
@@ -110,29 +101,19 @@ def leverancier_input():
 
 
 def eind_bestelling():
-    print("\nHartelijk bedankt voor uw bestelling bij:", prnt_naam_leverancier(), "\n", "Het totaal bedrag is:", bereken_totaalbedrag(), "\n", "De levertijd is:", prnt_levertijd_leverancier(), "\n", "Uw bestelling wordt vandaag nog naar u verzonden!")
+    print("\nHartelijk bedankt voor uw bestelling bij:", prnt_naam_leverancier(), "\n", "Het totaal bedrag is:", totaalbedrag_check(), "\n", "De levertijd is:", prnt_levertijd_leverancier(), "\n", "Uw bestelling wordt vandaag nog naar u verzonden!")
 
 
 def show_bestelling():
-    if artikel == 1:
-        print(producten_lst_ab[0]["artikelnaam"])
-    elif artikel == 2:
-        print(producten_lst_ab[1]["artikelnaam"])
-    elif artikel == 3:
-        print(producten_lst_ab[2]["artikelnaam"])
-    elif artikel == 4:
-        print(producten_lst_ab[3]["artikelnaam"])
-    else:
-        print(producten_lst_ab[4]["artikelnaam"])
-
+    print(producten_lst_ab[artikel - 1]["artikelnaam"])
     print("Wilt u de bestelling bevestigen? Zo ja, voer 'Ja' in. Als u de bestelling wilt annuleren, voer 'Nee' in.")
     bevestig_factuur()
 
 def bevestig_factuur():
     bevestig_input = input()
-    if bevestig_input == "Ja" or bevestig_input == "ja":
+    if bevestig_input == "Ja" or bevestig_input == "ja" or bevestig_input == "JA":
         eind_bestelling()
-    elif bevestig_input == "Nee" or bevestig_input == "nee":
+    elif bevestig_input == "Nee" or bevestig_input == "nee" or bevestig_input == "NEE":
         print("Bestelling geannuleerd.")
         sys.exit()
     else:
@@ -142,25 +123,7 @@ def bevestig_factuur():
 
 def totaalbedrag_check():
     global totaalbedrag
-    if leverancier == 1:
-        totaalbedrag = aantal * leveranciers_lst[0]["prijs"]
-    elif leverancier == 2:
-        totaalbedrag =  aantal * leveranciers_lst[1]["prijs"]
-    else:
-        totaalbedrag = aantal * leveranciers_lst[2]["prijs"]
-
-def bereken_totaalbedrag():
-    if artikel == 1:
-        totaalbedrag_check()
-    elif artikel == 2:
-        totaalbedrag_check()
-    elif artikel == 3:
-        totaalbedrag_check()
-    elif artikel == 4:
-        totaalbedrag_check()
-    else:
-        totaalbedrag_check()
-
+    totaalbedrag = aantal * leveranciers_lst[leverancier - 1]["prijs"]
     return str(totaalbedrag)
 
 
